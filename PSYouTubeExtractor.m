@@ -12,6 +12,7 @@
 @interface PSYouTubeExtractor() <UIWebViewDelegate> {
     BOOL testedDOM_;
     NSUInteger retryCount_;
+    NSInteger  domWaitCounter_;
     UIWebView *webView_;
     NSURLRequest *lastRequest_;
     PSYouTubeExtractor *selfReference_;
@@ -28,11 +29,12 @@
 @synthesize youTubeURL = youTubeURL_;
 
 #define kMaxNumberOfRetries 4 // numbers of retries
-#define kWatchdogDelay 1.2f   // seconds we wait for the DOM
+#define kWatchdogDelay 3.f    // seconds we wait for the DOM
+#define kExtraDOMDelay 3.f    // if DOM doesn't load, wait for some extra time
 
 // uncomment to enable logging
-#define PSLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
-//#define PSLog(fmt, ...) 
+//#define PSLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+#define PSLog(fmt, ...) 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark - NSObject
@@ -72,6 +74,8 @@
     selfReference_ = nil;    
     [webView_ stopLoading];
     webView_ = nil;
+    retryCount_ = 0;
+    domWaitCounter_ = 0;
 }
 
 - (BOOL)cancel {
@@ -90,6 +94,7 @@
 - (BOOL)doRetry_ {
     if (retryCount_ <= kMaxNumberOfRetries + 1) {
         retryCount_++;
+        domWaitCounter_ = 0;
         PSLog(@"Trying to load page...");
         webView_.delegate = nil;
         webView_ = [[UIWebView alloc] init];
@@ -115,6 +120,12 @@
         }
         [self cleanup_];
     }else {
+        if (domWaitCounter_ < kExtraDOMDelay * 2) {
+            domWaitCounter_++;
+            [self performSelector:@selector(DOMLoaded_) withObject:nil afterDelay:0.5f]; // try every 0.5 sec
+            return;
+        }
+        
         if (![self doRetry_]) {
             NSError *error = [NSError errorWithDomain:@"com.petersteinberger.betteryoutube" code:100 userInfo:[NSDictionary dictionaryWithObject:@"MP4 URL could not be found." forKey:NSLocalizedDescriptionKey]];
             if (failureBlock_) {
