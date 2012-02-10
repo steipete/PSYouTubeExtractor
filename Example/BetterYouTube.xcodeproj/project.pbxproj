@@ -16,7 +16,7 @@
 		781CFF6E14E4586000BD5D50 /* PSYouTubeTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 781CFF6D14E4586000BD5D50 /* PSYouTubeTestViewController.m */; };
 		781CFF7014E458AA00BD5D50 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 781CFF6F14E458AA00BD5D50 /* MediaPlayer.framework */; };
 		781CFFA914E48E9900BD5D50 /* PSYouTubeExtractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 781CFFA814E48E9900BD5D50 /* PSYouTubeExtractor.m */; };
-		781CFFAC14E4BCFA00BD5D50 /* PSYouTubeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 781CFFAB14E4BCFA00BD5D50 /* PSYouTubeView.m */; };
+		781CFFC414E4D2B700BD5D50 /* PSYouTubeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 781CFFC314E4D2B700BD5D50 /* PSYouTubeView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,8 +35,8 @@
 		781CFF6F14E458AA00BD5D50 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		781CFFA714E48E9900BD5D50 /* PSYouTubeExtractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSYouTubeExtractor.h; path = ../PSYouTubeExtractor.h; sourceTree = "<group>"; };
 		781CFFA814E48E9900BD5D50 /* PSYouTubeExtractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSYouTubeExtractor.m; path = ../PSYouTubeExtractor.m; sourceTree = "<group>"; };
-		781CFFAA14E4BCFA00BD5D50 /* PSYouTubeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSYouTubeView.h; sourceTree = "<group>"; };
-		781CFFAB14E4BCFA00BD5D50 /* PSYouTubeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSYouTubeView.m; sourceTree = "<group>"; };
+		781CFFC214E4D2B700BD5D50 /* PSYouTubeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PSYouTubeView.h; path = ../PSYouTubeView.h; sourceTree = "<group>"; };
+		781CFFC314E4D2B700BD5D50 /* PSYouTubeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PSYouTubeView.m; path = ../PSYouTubeView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,8 +111,8 @@
 			children = (
 				781CFFA714E48E9900BD5D50 /* PSYouTubeExtractor.h */,
 				781CFFA814E48E9900BD5D50 /* PSYouTubeExtractor.m */,
-				781CFFAA14E4BCFA00BD5D50 /* PSYouTubeView.h */,
-				781CFFAB14E4BCFA00BD5D50 /* PSYouTubeView.m */,
+				781CFFC214E4D2B700BD5D50 /* PSYouTubeView.h */,
+				781CFFC314E4D2B700BD5D50 /* PSYouTubeView.m */,
 			);
 			name = PSYouTubeExtractor;
 			sourceTree = "<group>";
@@ -183,7 +183,7 @@
 				781CFF6614E4583900BD5D50 /* PSAppDelegate.m in Sources */,
 				781CFF6E14E4586000BD5D50 /* PSYouTubeTestViewController.m in Sources */,
 				781CFFA914E48E9900BD5D50 /* PSYouTubeExtractor.m in Sources */,
-				781CFFAC14E4BCFA00BD5D50 /* PSYouTubeView.m in Sources */,
+				781CFFC414E4D2B700BD5D50 /* PSYouTubeView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
