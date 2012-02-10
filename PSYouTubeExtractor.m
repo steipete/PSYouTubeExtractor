@@ -20,14 +20,15 @@
 }
 - (void)DOMLoaded_;
 - (void)cleanup_;
+- (BOOL)doRetry_;
 @end
 
 @implementation PSYouTubeExtractor
 
 @synthesize youTubeURL = youTubeURL_;
 
-#define kMaxNumberOfRetries 3 // numbers of retries
-#define kWatchdogDelay 0.7f   // seconds we wait for the DOM
+#define kMaxNumberOfRetries 4 // numbers of retries
+#define kWatchdogDelay 1.2f   // seconds we wait for the DOM
 
 // uncomment to enable logging
 #define PSLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
@@ -42,10 +43,8 @@
         failureBlock_ = failure;
         youTubeURL_ = youTubeURL;
         selfReference_ = self; // retain while running!
-        webView_ = [[UIWebView alloc] init];
-        webView_.delegate = self;
-        [webView_ loadRequest:[NSURLRequest requestWithURL:youTubeURL]];
         PSLog(@"Starting YouTube extractor for %@", youTubeURL);
+        [self doRetry_];
     }
     return self;
 }
@@ -72,6 +71,7 @@
     failureBlock_ = nil;
     selfReference_ = nil;    
     [webView_ stopLoading];
+    webView_ = nil;
 }
 
 - (BOOL)cancel {
@@ -88,10 +88,13 @@
 
 // very possible that the DOM isn't really loaded after all or sth failed. Try to load website again.
 - (BOOL)doRetry_ {
-    if (retryCount_ <= kMaxNumberOfRetries) {
+    if (retryCount_ <= kMaxNumberOfRetries + 1) {
         retryCount_++;
-        PSLog(@"Trying again to load page...");
-        [webView_ loadRequest:[NSURLRequest requestWithURL:lastRequest_.URL]];
+        PSLog(@"Trying to load page...");
+        webView_.delegate = nil;
+        webView_ = [[UIWebView alloc] init];
+        webView_.delegate = self;
+        [webView_ loadRequest:[NSURLRequest requestWithURL:youTubeURL_]];
         [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(DOMLoaded_) object:nil];
         return YES;
     }
