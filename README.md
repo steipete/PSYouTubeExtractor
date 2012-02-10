@@ -6,7 +6,7 @@ There are two classes available:
 
 ### PSYouTubeExtractor
 
-Does some crazy things behind the scenes and extracts the mp4 of a YouTube video. I use a UIWebView to get the data, as Google does a pretty good job of obfuscating their html content. 
+Does some crazy things behind the scenes and extracts the mp4 of a YouTube video. I use an UIWebView to get the data, as Google does a pretty good job of obfuscating their html content. 
 
         [PSYouTubeExtractor extractorForYouTubeURL:self.youTubeURL success:^(NSURL *URL) {
             NSLog(@"Finished extracting: %@", URL);
@@ -42,6 +42,8 @@ I am using this class for [PSPDFKit](http://pspdfkit.com), my pdf framework wher
 If anyone has a better way of extracting the final YouTube mp4 url (maybe some crazy regex magic), it would make the class a lot faster (we could get rid of the UIWebView). I am kinda ok with the UIWebView solution though, as this one will be pretty robust. I look for a <video> tag, and as long as Google shows a video on a YouTube page, we find the source.
 
 Also, we could add support for Reachability to re-try the extracting in case we didn't had network when the view was created. Feel free to send a pull request!
+
+PS: If you like this stuff, [you should follow me on Twitter!](http://twitter.com/steipete)
 
 
 ### License
