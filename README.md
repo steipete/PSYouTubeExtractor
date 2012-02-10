@@ -35,7 +35,7 @@ The setting 'showNativeFirst' decides if you want to start with a MPMoviePlayerC
 I am using this class for [PSPDFKit](http://pspdfkit.com), my pdf framework where you can add interactive elements, and YouTube just sucked too much, so I wrote this helper. That's also why there is a block for "setupNativeView" and "setupWebView", you can override those and do your own custom stuff with it.
 
 ### ARC
-… what else?
+… what else? Also should work with iOS 4.0 upwards. Tested with iOS 4.3 and 5.0.
 
 ### Help wanted!
 
