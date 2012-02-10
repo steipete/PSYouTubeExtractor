@@ -15,14 +15,17 @@ Does some crazy things behind the scenes and extracts the mp4 of a YouTube video
             NSLog(@"Failed to query mp4: %@", error);
         }];
 
-Note that PSYouTubeExtractor is *not* a NSOperation, as there's some craziness behind the scenes that need a RunLoop (and I didn't want to mess around with Runloops in NSOperation). The class retains itself until either success or failure is called, or until you send cancel to it. The blocks are nullified afterwards, so don't worry about retain cycles. (You still have to worry about Xcode bit chin' about it.)
+Note that PSYouTubeExtractor is *not* a NSOperation, as there's some craziness behind the scenes that needs a RunLoop (and I don't wanna mess around with runloops in NSOperation). The class retains itself until either success or failure is called, or until you send cancel to it. The blocks are nullified afterwards, so don't worry about retain cycles. (You still have to worry about Xcode bit chin' about it.)
 
-### PSTouTubeView
+### PSYouTubeView
 
 Woohoo! That's where the awesomeness is. Just use this instead of your UIWebView and you're good.
 
-    NSURL *youTubeURL = [NSURL URLWithString:@"http://www.youtube.com/watch?v=Vo0Cazxj_yc"];    
-    PSYouTubeView *youTubeView = [[PSYouTubeView alloc] initWithYouTubeURL:youTubeURL frame:CGRectMake(0,0,200,200) showNativeFirst:YES];
+    NSURL *youTubeURL = [NSURL URLWithString:@"http://www.youtube.com/watch?v=Vo0Cazxj_yc"];  
+  
+    PSYouTubeView *youTubeView = [[PSYouTubeView alloc] initWithYouTubeURL:youTubeURL
+                                                                     frame:CGRectMake(0,0,200,200)
+                                                           showNativeFirst:YES];
     [self.view addSubview:youTubeView];
 
 Note that you should set the correct frame right away. If we need to fallback to UIWebView, the YouTube plugin can't resize. (You can recreate it, but that would kill a running video). However, in most cases it should extract the mp4 successfully and you don't need to worry about that crap.
@@ -30,6 +33,9 @@ Note that you should set the correct frame right away. If we need to fallback to
 The setting 'showNativeFirst' decides if you want to start with a MPMoviePlayerController or a UIWebView. As we are optimistic, I suggest you set this to YES per default.
 
 I am using this class for [PSPDFKit](http://pspdfkit.com), my pdf framework where you can add interactive elements, and YouTube just sucked too much, so I wrote this helper. That's also why there is a block for "setupNativeView" and "setupWebView", you can override those and do your own custom stuff with it.
+
+### ARC
+… what else?
 
 ### Help wanted!
 
