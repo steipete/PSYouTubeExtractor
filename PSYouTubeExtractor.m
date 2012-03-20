@@ -61,13 +61,6 @@
     webView_.delegate = nil;
 }
 
-+ (void)initialize {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        [NSMutableURLRequest setupUserAgentOverwrite];
-    });
-}
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark - Static
 
