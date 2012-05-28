@@ -1,5 +1,8 @@
 ## PSYouTubeExtractor ("BetterYouTube")
 
+*Edit: This was a nice experiment, but there's now a better solution that doesn't involve UIWebViews: https://github.com/larcus94/LBYouTubeView*
+
+
 Displaying YouTube is a pain in the ass. This class makes it a lot more bearable by trying to extract the native mp4 when available. If that doesn't work, we fall back to the UIWebView YouTube plugin.
 
 There are two classes available:
